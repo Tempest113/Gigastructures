@@ -56,6 +56,7 @@ building_giga_asteroid_factory_alloys = {
             inline_script = {
                 script = planet/alloys/giga_foundry_job_swap
                 jobs = @asteroid_industry_job_count
+                description = 0
             }
         "
     }
@@ -107,6 +108,7 @@ building_giga_asteroid_factory_consumer_goods = {
         modifiers = "
             triggered_planet_modifier = {
                 potential = {
+                    industrial_jobs_are_catalytic_trigger = no
                     solar_system = {
                         any_system_megastructure = {
                             is_megastructure_type = asteroid_manufactory_consumer_goods
@@ -120,6 +122,44 @@ building_giga_asteroid_factory_consumer_goods = {
             inline_script = {
                 script = planet/consumer_goods/giga_artisan_job_swap
                 jobs = @asteroid_industry_job_count
+                description = 0
+            }
+            triggered_planet_modifier = {
+                potential = {
+                    industrial_jobs_are_catalytic_trigger = yes
+                    exists = planet
+                    planet = {
+                        artisan_is_pearl_diver_trigger = no
+                    }
+                    solar_system = {
+                        any_system_megastructure = {
+                            is_megastructure_type = asteroid_manufactory_consumer_goods
+                        }
+                    }
+                }
+                planet_artisans_food_upkeep_add = -1.5
+                planet_artisans_energy_upkeep_add = 0.5
+
+                multiplier = value:giga_job_scaling_plus_base
+            }
+            triggered_planet_modifier = {
+                potential = {
+                    industrial_jobs_are_catalytic_trigger = yes
+                    exists = planet
+                    planet = {
+                        artisan_is_pearl_diver_trigger = yes
+                    }
+                    solar_system = {
+                        any_system_megastructure = {
+                            is_megastructure_type = asteroid_manufactory_consumer_goods
+                        }
+                    }
+                }
+                planet_artisans_minerals_upkeep_add = -0.5
+                planet_artisans_food_upkeep_add = -1
+                planet_artisans_energy_upkeep_add = 0.5
+
+                multiplier = value:giga_job_scaling_plus_base
             }
         "
     }
@@ -184,6 +224,7 @@ building_giga_asteroid_factory_energy = {
             inline_script = {
                 script = planet/energy/giga_technician_job_swap
                 jobs = @asteroid_industry_job_count
+                description = 0
             }
         "
     }
@@ -241,12 +282,20 @@ building_giga_asteroid_factory_food = {
                 }
                 planet_farmers_produces_mult = 0.05
             }
-
             triggered_planet_modifier = {
                 potential = {
                     exists = owner
-                    owner = {
-                        is_anglers_empire = yes
+                    planet = {
+                        artisan_is_pearl_diver_trigger = yes
+                    }
+                    not = {
+                        industrial_jobs_are_catalytic_trigger = yes
+                        planet = { has_building = building_giga_asteroid_factory_consumer_goods }
+                        solar_system = {
+                            any_system_megastructure = {
+                                is_megastructure_type = asteroid_manufactory_consumer_goods
+                            }
+                        }
                     }
                     solar_system = {
                         any_system_megastructure = {
@@ -256,10 +305,32 @@ building_giga_asteroid_factory_food = {
                 }
                 planet_artisans_food_upkeep_mult = -0.1
             }
+            triggered_planet_modifier = {
+                potential = {
+                    exists = owner
+                    industrial_jobs_are_catalytic_trigger = yes
+                    planet = {
+                        artisan_is_pearl_diver_trigger = yes
+                    }
+                    planet = { has_building = building_giga_asteroid_factory_consumer_goods }
+                    solar_system = {
+                        any_system_megastructure = {
+                            is_megastructure_type = asteroid_manufactory_consumer_goods
+                        }
+                    }
+                    solar_system = {
+                        any_system_megastructure = {
+                            is_megastructure_type = asteroid_manufactory_food
+                        }
+                    }
+                }
+                planet_artisans_food_upkeep_mult = -0.05
+            }
 
             inline_script = {
                 script = planet/food/giga_farmer_job_swap
                 jobs = @asteroid_industry_job_count
+                description = 0
             }
 
             triggered_desc = {
@@ -334,6 +405,7 @@ building_giga_asteroid_factory_supertensiles = {
             inline_script = {
                 script = planet/supertensiles/giga_megaengineer_job_swap
                 jobs = @asteroid_industry_job_count
+                description = 0
             }
         "
     }
