@@ -324,6 +324,29 @@ planet_districts = {
 	modifier_category = planet
 }
 
+planet_researchers = {
+	icon = "job_researcher"
+	parent = planet_jobs_specialist
+	generate_add_modifiers = {
+		produces
+		upkeep
+	}
+	generate_mult_modifiers = {
+		produces
+		upkeep
+	}
+	modifier_category = pop_job
+}
+
+planet_engineers = {
+	icon = "job_researcher"
+	parent = planet_researchers
+	generate_add_modifiers = {
+		upkeep
+	}
+	modifier_category = planet
+}
+
 # planet_researchers = {
 # 	icon = "job_researcher"
 # 	parent = planet_jobs_specialist
@@ -378,6 +401,69 @@ planet_districts = {
 # 	}
 # 	modifier_category = pop_job
 # }
+	generate_mult_modifiers = {
+		produces
+		upkeep
+	}
+	triggered_upkeep_modifier = {
+		key = planet_researchers
+		modifier_types = {
+			add
+		}
+		trigger = {
+			always = yes
+		}
+		use_parent_icon = yes
+	}
+	modifier_category = pop_job
+}
+
+planet_biologists = {
+	icon = "job_researcher"
+	parent = planet_researchers
+	generate_add_modifiers = {
+		produces
+		upkeep
+	}
+	generate_mult_modifiers = {
+		produces
+		upkeep
+	}
+	triggered_upkeep_modifier = {
+		key = planet_researchers
+		modifier_types = {
+			add
+		}
+		trigger = {
+			always = yes
+		}
+		use_parent_icon = yes
+	}
+	modifier_category = pop_job
+}
+
+planet_physicists = {
+	parent = planet_researchers
+	generate_add_modifiers = {
+		produces
+		upkeep
+	}
+	generate_mult_modifiers = {
+		produces
+		upkeep
+	}
+	triggered_upkeep_modifier = {
+		key = planet_researchers
+		modifier_types = {
+			add
+		}
+		trigger = {
+			always = yes
+		}
+		use_parent_icon = yes
+	}
+	modifier_category = pop_job
+}
 
 planet_politicians = {
 	parent = planet_jobs_ruler
@@ -662,7 +748,6 @@ planet_livestock_farmers = {
 	generate_add_modifiers = {
 		produces
 	}
-	modifier_category = pop_job
 
 	generate_mult_modifiers = {
 		produces
@@ -675,7 +760,6 @@ planet_livestock_miners = {
 	generate_add_modifiers = {
 		produces
 	}
-	modifier_category = pop_job
 
 	generate_mult_modifiers = {
 		produces
@@ -762,6 +846,7 @@ planet_pops = {
 			is_lithoid = yes 
 		}
 	}
+
 	triggered_upkeep_modifier = {
 		key = planet_pops_psionic
 		modifier_types = {
@@ -860,6 +945,9 @@ pop_category_drones = {
 	parent = planet_pops
 	modifier_category = pop_group
 	generate_add_modifiers = {
+		upkeep
+	}
+	generate_mult_modifiers = {
 		upkeep
 	}
 
